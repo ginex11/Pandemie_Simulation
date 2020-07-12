@@ -26,9 +26,7 @@ public class Main extends Application {
             people.add(m);
             count++;
         }
-        System.out.println(people.size());
-
-
+        
         AnimationTimer timer = new AnimationTimer() {
             @Override
             public void handle(long l) {
