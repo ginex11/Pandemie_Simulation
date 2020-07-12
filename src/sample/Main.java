@@ -21,7 +21,7 @@ public class Main extends Application {
         ArrayList<Mensch> people = new ArrayList<>();
         Mensch m = new Mensch(true, pane);
         people.add(m);
-        while (count < 30) {
+        while (count < 1000) {
             m = new Mensch(false, pane);
             people.add(m);
             count++;
@@ -32,7 +32,10 @@ public class Main extends Application {
         AnimationTimer timer = new AnimationTimer() {
             @Override
             public void handle(long l) {
-                people.get(0).move(ARR[RAND.nextInt(2)], ARR[RAND.nextInt(2)]);
+                for (Mensch p : people) {
+                    p.move(ARR[RAND.nextInt(2)], ARR[RAND.nextInt(2)]);
+                }
+
             }
         };
 
