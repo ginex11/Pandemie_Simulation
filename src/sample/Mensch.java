@@ -23,12 +23,7 @@ public class Mensch {
         this.world = world;
         circle = !isSick ? new Circle(r.nextInt( WIDTH- 1) + 1, r.nextInt(HEIGHT - 1) + 1, 2, Color.LIGHTGREEN) :
                 new Circle(r.nextInt(WIDTH - 1) + 1, r.nextInt(HEIGHT - 1) + 1, 2, Color.RED);
-        this.traceLine = new Line();
-        traceLine.setStartX(circle.getCenterX());
-        traceLine.setStartY(circle.getCenterY());
-        traceLine.setEndX(circle.getCenterX());
-        traceLine.setEndY(circle.getCenterY());
-        world.getChildren().addAll(this.circle, traceLine);
+        world.getChildren().add(this.circle);
     }
 
     public Circle getCircle() {
@@ -36,15 +31,9 @@ public class Mensch {
     }
 
     public void move(double dx, double dy) {
-        this.traceLine = new Line();
-        traceLine.setStroke(Color.rgb(23, 0, 0, 0.5));
-        traceLine.setStrokeWidth(0.5);
-        traceLine.setStartX(circle.getCenterX());
-        traceLine.setStartY(circle.getCenterY());
+
         circle.setCenterX(circle.getCenterX()+dx);
         circle.setCenterY(circle.getCenterY()+dy);
-        traceLine.setEndX(circle.getCenterX());
-        traceLine.setEndY(circle.getCenterY());
-        world.getChildren().add(traceLine);
+
     }
 }
