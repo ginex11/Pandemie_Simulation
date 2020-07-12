@@ -7,10 +7,13 @@ import javafx.scene.shape.Line;
 
 import java.util.Random;
 
+import static sample.Const.HEIGHT;
+import static sample.Const.WIDTH;
+
 public class Mensch {
 
     public Random r = new Random();
-    Line traceLine=new Line();
+    Line traceLine;
     private Circle circle;
     private boolean isSick;
     Pane world;
@@ -18,10 +21,13 @@ public class Mensch {
     public Mensch(boolean isSick, Pane world) {
         this.isSick = isSick;
         this.world = world;
-        circle = isSick == false ? new Circle(1 * r.nextInt(1280 - 1) + 1, 1 * r.nextInt(720 - 1) + 1, 2, Color.LIGHTGREEN) :
-                new Circle(1 * r.nextInt(1280 - 1) + 1, 1 * r.nextInt(720 - 1) + 1, 2, Color.RED);
+        circle = !isSick ? new Circle(r.nextInt( WIDTH- 1) + 1, r.nextInt(HEIGHT - 1) + 1, 2, Color.LIGHTGREEN) :
+                new Circle(r.nextInt(WIDTH - 1) + 1, r.nextInt(HEIGHT - 1) + 1, 2, Color.RED);
+        this.traceLine = new Line();
         traceLine.setStartX(circle.getCenterX());
         traceLine.setStartY(circle.getCenterY());
+        traceLine.setEndX(circle.getCenterX());
+        traceLine.setEndY(circle.getCenterY());
         world.getChildren().addAll(this.circle, traceLine);
     }
 
@@ -30,14 +36,15 @@ public class Mensch {
     }
 
     public void move(double dx, double dy) {
+        this.traceLine = new Line();
         traceLine.setStroke(Color.rgb(23, 0, 0, 0.5));
         traceLine.setStrokeWidth(0.5);
         traceLine.setStartX(circle.getCenterX());
         traceLine.setStartY(circle.getCenterY());
-        circle.setCenterX(dx);
-        circle.setCenterY(dy);
+        circle.setCenterX(circle.getCenterX()+dx);
+        circle.setCenterY(circle.getCenterY()+dy);
         traceLine.setEndX(circle.getCenterX());
         traceLine.setEndY(circle.getCenterY());
-        //this.world.getChildren().add(traceLine);
+        world.getChildren().add(traceLine);
     }
 }
