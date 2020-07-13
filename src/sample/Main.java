@@ -21,24 +21,28 @@ public class Main extends Application {
         ArrayList<Mensch> people = new ArrayList<>();
         Mensch m = new Mensch(true, pane);
         people.add(m);
-        while (count < 1000) {
+        while (count < 50) {
             m = new Mensch(false, pane);
             people.add(m);
             count++;
         }
-        
         AnimationTimer timer = new AnimationTimer() {
             @Override
             public void handle(long l) {
                 for (Mensch p : people) {
-                    p.move(ARR[RAND.nextInt(2)], ARR[RAND.nextInt(2)]);
+                    p.move(Math.cos(Math.random() * 2 * Math.PI)*ARR[RAND.nextInt(3)],
+                            Math.sin(Math.random() * 2 * Math.PI)*ARR[RAND.nextInt(3)]);
                 }
+                double p =Math.random();
+                System.out.println("Random: "+p);
+                System.out.println("Random mal PI: "+(p * 2 * Math.PI));
+
+                System.out.println("Cos: "+Math.cos(p * (2 * Math.PI))*ARR[2]);
+                System.out.println("Sin: "+Math.sin(p * (2 * Math.PI))*ARR[2]);
 
             }
         };
-
         timer.start();
-
         Scene scene = new Scene(pane, WIDTH, HEIGHT);
         primaryStage.setScene(scene);
         primaryStage.show();
