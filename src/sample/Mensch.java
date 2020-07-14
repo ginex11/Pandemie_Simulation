@@ -8,9 +8,9 @@ import static sample.Const.*;
 
 
 public class Mensch {
-    private Circle circle;
+    private final Circle circle;
     private final boolean isSick;
-    private Pane world;
+    private final Pane world;
     private final Position position;
 
 
