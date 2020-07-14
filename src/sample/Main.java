@@ -1,47 +1,22 @@
 package sample;
 
-import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-import java.util.ArrayList;
-
-import static sample.Const.*;
+import static sample.Const.HEIGHT;
+import static sample.Const.WIDTH;
 
 public class Main extends Application {
-    int count = 1;
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
-        long FRAMES_PER_SEC = 40L;
-        long INTERVAL = 1000000000L / FRAMES_PER_SEC;
-
+    public void start(Stage primaryStage) {
         primaryStage.setTitle("COVID19_Simulation");
         Pane pane = new Pane();
-        ArrayList<Mensch> people = new ArrayList<>();
-        Mensch m = new Mensch(true, pane);
-        people.add(m);
-        while (count < 100) {
-            m = new Mensch(false, pane);
-            people.add(m);
-            count++;
-        }
-        AnimationTimer timer = new AnimationTimer() {
-            long last = 0;
-            @Override
-            public void handle(long l) {
-                if (l - last > INTERVAL) {
-                    last = l;
-                    for (Mensch p : people) {
-                        people.set(people.indexOf(p), p.move());
-                    }
-                }
-
-            }
-        };
-        timer.start();
+        //Start the simulation
+        Simulation sim = new Simulation(pane, 100);
+        sim.start();
         Scene scene = new Scene(pane, WIDTH, HEIGHT);
         primaryStage.setScene(scene);
         primaryStage.show();
