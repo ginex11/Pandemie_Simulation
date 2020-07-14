@@ -15,6 +15,8 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        long FRAMES_PER_SEC = 30L;
+        long INTERVAL = 1000000000L / FRAMES_PER_SEC;
 
         primaryStage.setTitle("COVID19_Simulation");
         Pane pane = new Pane();
@@ -27,18 +29,17 @@ public class Main extends Application {
             count++;
         }
         AnimationTimer timer = new AnimationTimer() {
+            long last = 0;
+
             @Override
             public void handle(long l) {
-                for (Mensch p : people) {
-                    p.move(Math.cos(Math.random() * 2 * Math.PI)*ARR[RAND.nextInt(3)],
-                            Math.sin(Math.random() * 2 * Math.PI)*ARR[RAND.nextInt(3)]);
-                }
-                double p =Math.random();
-                System.out.println("Random: "+p);
-                System.out.println("Random mal PI: "+(p * 2 * Math.PI));
+                if (l - last > INTERVAL) {
+                    last = l;
 
-                System.out.println("Cos: "+Math.cos(p * (2 * Math.PI))*ARR[2]);
-                System.out.println("Sin: "+Math.sin(p * (2 * Math.PI))*ARR[2]);
+                    for (Mensch p : people) {
+                        people.set(people.indexOf(p),p.move());
+                    }
+                }
 
             }
         };

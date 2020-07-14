@@ -8,49 +8,56 @@ import static sample.Const.*;
 
 
 public class Mensch {
-
     private Circle circle;
-    private boolean isSick;
+    private final boolean isSick;
     private Pane world;
-    private double x;
-    private double y;
+    private final Position position;
+
 
     public Mensch(boolean isSick, Pane world) {
+        System.out.println("Mensch wurde erzeugt");
         this.isSick = isSick;
         this.world = world;
-        this.x = RAND.nextDouble() * (WIDTH - RADIUS * 2);
-        this.y = RAND.nextDouble() * (HEIGHT - RADIUS * 2);
-        circle = !isSick ? new Circle(this.x, this.y, RADIUS, Color.GREEN) :
-                new Circle(this.x, this.y, RADIUS, Color.RED);
+        this.position = new Position(RAND.nextDouble() * (WIDTH - RADIUS * 2),
+                RAND.nextDouble() * (HEIGHT - RADIUS * 2));
+
+        this.circle = !isSick ? new Circle(position.getX(), position.getY(), RADIUS, Color.GREEN) :
+                new Circle(position.getX(), position.getY(), RADIUS, Color.RED);
         this.world.getChildren().add(this.circle);
+        System.out.println(this.world.getChildren().indexOf(circle));
     }
+
+    public Mensch(Circle c, boolean isSick, Pane world, Position position) {
+        System.out.println("Mensch wurde bewegt");
+        this.isSick = isSick;
+        this.world = world;
+        this.position = position;
+
+        this.circle = c;
+        System.out.println("MainX: " + this.circle.getCenterX());
+        drawShape();
+        this.world.getChildren().remove(c);
+        this.world.getChildren().add(circle);
+        System.out.println(this.world.getChildren().indexOf(circle) + " und " + this.world.getChildren().size());
+
+    }
+
 
     public Circle getCircle() {
         return circle;
     }
 
-    public void move(double dx, double dy) {
-        /**Line line = new Line();
-        line.setFill(Color.TRANSPARENT);
-        line.setStrokeWidth(0.3);
-        line.setStartX(this.x);
-        line.setStartY(this.y);**/
-
-
-        if (this.x + dx > WIDTH - RADIUS * 2 || this.x + dx < RADIUS)
-            dx *= -1;
-        if (this.y + dy > HEIGHT - RADIUS * 2 || this.y + dy < RADIUS)
-            dy *= -1;
-        circle.setCenterX(this.x += dx);
-        circle.setCenterX(this.x += dx);
-        circle.setCenterY(this.y += dy);
-        circle.setCenterY(this.y += dy);
-       /** line.setEndX(this.x);
-        line.setEndY(this.y);
-
-        world.getChildren().add(line);**/
-
+    public Mensch move() {
+        Position pos = position.newMoveDirection(this.position.getX(), this.position.getY());
+        return new Mensch(circle, isSick, this.world, pos);
     }
 
+    public void drawShape() {
+        this.circle.setCenterX(position.getX());
+        this.circle.setCenterY(position.getY());
+    }
 
+    public Position getPosition() {
+        return position;
+    }
 }
