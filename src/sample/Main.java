@@ -15,7 +15,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        long FRAMES_PER_SEC = 30L;
+        long FRAMES_PER_SEC = 40L;
         long INTERVAL = 1000000000L / FRAMES_PER_SEC;
 
         primaryStage.setTitle("COVID19_Simulation");
@@ -23,21 +23,19 @@ public class Main extends Application {
         ArrayList<Mensch> people = new ArrayList<>();
         Mensch m = new Mensch(true, pane);
         people.add(m);
-        while (count < 50) {
+        while (count < 100) {
             m = new Mensch(false, pane);
             people.add(m);
             count++;
         }
         AnimationTimer timer = new AnimationTimer() {
             long last = 0;
-
             @Override
             public void handle(long l) {
                 if (l - last > INTERVAL) {
                     last = l;
-
                     for (Mensch p : people) {
-                        people.set(people.indexOf(p),p.move());
+                        people.set(people.indexOf(p), p.move());
                     }
                 }
 
