@@ -1,6 +1,6 @@
 package sample;
 
-class MoveDirection {
+public class MoveDirection {
     private final double direction;
 
     public MoveDirection(double direction) {

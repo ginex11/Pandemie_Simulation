@@ -32,13 +32,16 @@ public class Mensch {
             cos *= -1;
             this.moveDirection = new MoveDirection(DIRECTION());
         }
-
         if (this.circle.getCenterY() + sin > HEIGHT - RADIUS * 2 || this.circle.getCenterY() + sin < RADIUS) {
             sin *= -1;
             this.moveDirection = new MoveDirection(DIRECTION());
         }
-
         this.circle.setCenterX(this.circle.getCenterX() + cos);
         this.circle.setCenterY(this.circle.getCenterY() + sin);
+    }
+
+    public boolean collision(Mensch mensch) {
+//        if(this.circle.getCenterX())
+        return false;
     }
 }
