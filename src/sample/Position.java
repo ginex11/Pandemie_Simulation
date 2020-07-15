@@ -7,7 +7,6 @@ class MoveDirection {
         this.direction = direction;
     }
 
-
     public double getCos() {
         return Math.cos(direction);
     }
@@ -15,6 +14,4 @@ class MoveDirection {
     public double getSin() {
         return Math.sin(direction);
     }
-
-
 }
