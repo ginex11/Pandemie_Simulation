@@ -10,7 +10,7 @@ import static sample.Const.INTERVAL;
 public class Simulation extends AnimationTimer {
     private final ArrayList<Mensch> people = new ArrayList<>();
     private final Pane world;
-    long last = 0;
+    private long last = 0;
 
     public Simulation(Pane world, int count) {
         this.world = world;
@@ -21,7 +21,7 @@ public class Simulation extends AnimationTimer {
     public void handle(long l) {
         if (l - last > INTERVAL) {
             for (Mensch p : people) {
-                people.set(people.indexOf(p), p.move());
+                p.move();
             }
             last = l;
         }
