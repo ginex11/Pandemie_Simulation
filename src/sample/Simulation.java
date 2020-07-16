@@ -43,10 +43,7 @@ public class Simulation extends AnimationTimer {
         for (Mensch p : people) {
             for (Mensch j : people) {
                 p.collision(j);
-
             }
         }
     }
-
-
 }
