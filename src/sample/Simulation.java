@@ -24,6 +24,7 @@ public class Simulation extends AnimationTimer {
                 p.move();
             }
             last = l;
+            checkForCollision();
         }
     }
 
@@ -35,6 +36,15 @@ public class Simulation extends AnimationTimer {
             m = new Mensch(false, world);
             people.add(m);
             tmp++;
+        }
+    }
+
+    public void checkForCollision() {
+        for (Mensch p : people) {
+            for (Mensch j : people) {
+                p.collision(j);
+
+            }
         }
     }
 
