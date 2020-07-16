@@ -7,8 +7,8 @@ import javafx.scene.shape.Circle;
 import static sample.Const.*;
 
 public class Mensch {
-    private final Circle circle;
-    private final boolean isSick;
+    private Circle circle;
+    private boolean isSick;
     private final Pane world;
     private MoveDirection moveDirection;
 
@@ -36,12 +36,18 @@ public class Mensch {
             sin *= -1;
             this.moveDirection = new MoveDirection(DIRECTION());
         }
-        this.circle.setCenterX(this.circle.getCenterX() + cos);
-        this.circle.setCenterY(this.circle.getCenterY() + sin);
+        this.circle.setCenterX(this.circle.getCenterX() + cos * 2);
+        this.circle.setCenterY(this.circle.getCenterY() + sin * 2);
     }
 
     public boolean collision(Mensch mensch) {
-//        if(this.circle.getCenterX())
+        if (Math.sqrt(Math.pow(this.circle.getCenterX() - mensch.circle.getCenterX(), 2) +
+                Math.pow(this.circle.getCenterY() - mensch.circle.getCenterY(), 2)) < 2 * RADIUS) {
+            if (mensch.isSick && !this.isSick) {
+                this.isSick = true;
+                this.circle.setFill(Color.RED);
+            }
+        }
         return false;
     }
 }
