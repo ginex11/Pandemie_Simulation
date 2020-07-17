@@ -36,16 +36,18 @@ public class Mensch {
             sin *= -1;
             this.moveDirection = new MoveDirection(DIRECTION());
         }
-        this.circle.setCenterX(this.circle.getCenterX() + cos * 2);
-        this.circle.setCenterY(this.circle.getCenterY() + sin * 2);
+        this.circle.setCenterX(this.circle.getCenterX() + cos * SPEED);
+        this.circle.setCenterY(this.circle.getCenterY() + sin * SPEED);
     }
 
     public boolean collision(Mensch mensch) {
         if (Math.sqrt(Math.pow(this.circle.getCenterX() - mensch.circle.getCenterX(), 2) +
-                Math.pow(this.circle.getCenterY() - mensch.circle.getCenterY(), 2)) < 2 * RADIUS) {
+                Math.pow(this.circle.getCenterY() - mensch.circle.getCenterY(), 2)) < 3 * RADIUS) {
             if (mensch.isSick && !this.isSick) {
-                this.isSick = true;
-                this.circle.setFill(Color.RED);
+                if (RAND.nextDouble() < CONSTAGIOUSINDEX) {
+                    this.isSick = true;
+                    this.circle.setFill(Color.RED);
+                }
             }
         }
         return false;
