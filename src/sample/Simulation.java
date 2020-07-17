@@ -11,6 +11,7 @@ public class Simulation extends AnimationTimer {
     private final ArrayList<Mensch> people = new ArrayList<>();
     private final Pane world;
     private long last = 0;
+    private static int pastTime = 0;
 
     public Simulation(Pane world, int count) {
         this.world = world;
@@ -27,6 +28,7 @@ public class Simulation extends AnimationTimer {
             checkForCollision();
         }
     }
+
 
     public void fillListWithPeople(int count) {
         int tmp = 0;

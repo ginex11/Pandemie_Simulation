@@ -1,29 +1,29 @@
 package sample;
 
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.FlowPane;
 import javafx.stage.Stage;
-
-import static sample.Const.HEIGHT;
-import static sample.Const.WIDTH;
 
 public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        primaryStage.setTitle("COVID19_Simulation");
-        Pane pane = new Pane();
-        //Start the simulation
-        Simulation sim = new Simulation(pane, 100);
-        sim.start();
-        Scene scene = new Scene(pane, WIDTH, HEIGHT);
-        primaryStage.setScene(scene);
-        primaryStage.show();
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            FlowPane root =
+                    loader.load(getClass().getResource("sample.fxml").openStream());
+            primaryStage.setScene(new Scene(root));
+            primaryStage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.exit(1);
+        }
     }
-
 
     public static void main(String[] args) {
         launch(args);
     }
 }
+
