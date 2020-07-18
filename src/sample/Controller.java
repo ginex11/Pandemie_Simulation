@@ -19,4 +19,9 @@ public class Controller {
         simulation.start();
 
     }
+    @FXML
+    public void end() {
+        simulation.stop();
+
+    }
 }
