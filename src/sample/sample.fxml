@@ -17,7 +17,7 @@
          <font>
             <Font name="System Bold" size="13.0" />
          </font></Button>
-      <Button mnemonicParsing="false" onAction="#end" text="Beenden">
+      <Button mnemonicParsing="false" onAction="#end" text="Pause">
          <FlowPane.margin>
             <Insets left="5.0" />
          </FlowPane.margin>
