@@ -1,6 +1,7 @@
 package sample;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Slider;
 import javafx.scene.layout.Pane;
 
 public class Controller {
@@ -11,7 +12,7 @@ public class Controller {
     @FXML
     public void initialize() {
 
-        simulation = new Simulation(world,500);
+        simulation = new Simulation(world, 500);
     }
 
     @FXML
@@ -19,9 +20,20 @@ public class Controller {
         simulation.start();
 
     }
+
     @FXML
     public void end() {
         simulation.stop();
+
+    }
+
+    //in the Controller class
+    @FXML
+    private Slider slider;
+
+    @FXML
+    public void setSpeed() {
+        Const.SPEED = slider.getValue();
 
     }
 }
